@@ -31,3 +31,7 @@ Este repositório serve como base para:
 ---
 
 ## 📌 Estrutura Atual
+
+devops-labs/
+├── README.md
+└── runbook-wsl-vscode-git.md
