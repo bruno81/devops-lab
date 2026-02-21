@@ -24,196 +24,45 @@ Abra o **PowerShell**:
 
 ```powershell
 wsl --status
+```
 
 Se não reconhecer o comando, habilite os recursos do Windows abaixo.
 
-Habilitar recursos necessários (recomendado via CLI)
+---
+
+### Habilitar recursos necessários (via CLI)
 
 No PowerShell (Administrador):
 
+```powershell
 dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-
+```
 
 Reinicie o Windows após habilitar.
 
-Definir WSL2 como padrão
+---
+
+### Definir WSL2 como padrão
+
+```powershell
 wsl --set-default-version 2
+```
 
-Listar distros disponíveis
+---
+
+### Listar distros disponíveis
+
+```powershell
 wsl --list --online
+```
 
-Instalar Ubuntu 22.04
+---
+
+### Instalar Ubuntu 22.04
+
+```powershell
 wsl --install -d Ubuntu-22.04
-
+```
 
 Durante a instalação será solicitado criar usuário e senha no Linux.
-
-2. Gerenciamento de distros
-Listar distros instaladas e versão
-wsl -l -v
-
-Entrar na distro
-wsl
-
-
-Ou específica:
-
-wsl -d Ubuntu-22.04
-
-Sair da distro
-exit
-
-Parar todas as distros
-wsl --shutdown
-
-Parar uma distro específica
-wsl --terminate Ubuntu-22.04
-
-Definir distro padrão
-wsl --set-default Ubuntu-22.04
-
-Remover uma distro
-wsl --unregister NOME_DA_DISTRO
-
-3. Hostname permanente no WSL
-
-Dentro do WSL:
-
-sudo hostnamectl set-hostname devops-lab
-hostname
-
-
-Para persistir após reinício, edite /etc/wsl.conf:
-
-sudo vim /etc/wsl.conf
-
-
-Conteúdo:
-
-[network]
-hostname=devops-lab
-generateHosts=false
-
-
-Aplicar no PowerShell:
-
-wsl --shutdown
-
-
-Entrar novamente:
-
-wsl -d Ubuntu-22.04
-
-4. Backup e restore de distro
-Exportar (backup)
-wsl --export Ubuntu-22.04 ubuntu-backup.tar
-
-Importar (restore)
-wsl --import Ubuntu-22.04-restaurado C:\WSL\ ubuntu-backup.tar
-
-5. Integração VSCode + WSL
-Método 1 (recomendado)
-
-Instale o VSCode no Windows
-
-Instale a extensão Remote - WSL
-
-No VSCode: Ctrl + Shift + P → WSL: Connect to WSL
-
-No canto inferior esquerdo deve aparecer algo como:
-
-WSL: Ubuntu-22.04
-
-Método 2 (garantir comando code no PATH)
-
-Dentro do WSL:
-
-echo 'export PATH="$PATH:/mnt/c/Users/SEU_USUARIO/AppData/Local/Programs/Microsoft VS Code/bin"' >> ~/.bashrc
-source ~/.bashrc
-which code
-
-
-Abrir pasta no VSCode:
-
-code .
-
-6. Git: configuração e fluxo básico
-Instalar Git
-sudo apt update
-sudo apt install git -y
-git --version
-
-Configurar identidade (obrigatório)
-git config --global user.name "Seu Nome"
-git config --global user.email "seuemail@email.com"
-git config --list
-
-Criar projeto versionado (exemplo)
-mkdir -p ~/projects/devops-labs/git-basico
-cd ~/projects/devops-labs/git-basico
-echo "# Meu primeiro projeto Git" > README.md
-
-Entender o fluxo básico
-
-Git tem 3 áreas:
-
-Working directory (seus arquivos)
-
-Staging area
-
-Commit (histórico)
-
-Comandos:
-
-git init
-git add README.md
-git commit -m "Primeiro commit"
-git status
-git log --oneline
-
-
-Renomear branch principal para main:
-
-git branch -m main
-git branch
-
-7. SSH para GitHub
-Verificar SSH
-ssh -V
-
-
-Se precisar instalar:
-
-sudo apt install openssh-client -y
-
-Gerar chave (ed25519)
-ssh-keygen -t ed25519 -C "seu-email-do-github@email.com"
-ls ~/.ssh
-
-
-Arquivos:
-
-id_ed25519 (privada)
-
-id_ed25519.pub (pública)
-
-Copiar chave pública
-cat ~/.ssh/id_ed25519.pub
-
-
-Adicione no GitHub em: Settings → SSH and GPG keys → New SSH key
-
-Testar conexão
-ssh -T git@github.com
-
-Conectar repositório remoto e fazer push
-
-Dentro do seu projeto:
-
-git remote add origin git@github.com:SEU_USUARIO/devops-lab.git
-git remote -v
-git push -u origin main
-
-
-O que -u faz: cria vínculo entre branch local e remota para facilitar próximos push/pull.
