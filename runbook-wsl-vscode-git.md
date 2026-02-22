@@ -295,15 +295,33 @@ git branch
 
 ---
 
-## 7. SSH para GitHub
+## 7. Publicar projeto no GitHub (SSH)
 
-### Verificar SSH
+### 7.1 Criar repositório no GitHub
+
+1. Acesse https://github.com
+2. Clique na sua foto de perfil (canto superior direito)
+3. Clique em **Your repositories**
+4. Clique em **New**
+5. Defina o nome do repositório (ex: devops-lab)
+6. Escolha se será **Public** ou **Private**
+7. ⚠️ Não marque as opções:
+   - Add a README
+   - Add .gitignore
+   - Add license
+8. Clique em **Create repository**
+
+---
+
+### 7.2 Configurar acesso SSH
+
+#### Verificar se o SSH está instalado
 
 ```bash
 ssh -V
 ```
 
-Se necessário, instalar:
+Se necessário:
 
 ```bash
 sudo apt install openssh-client -y
@@ -311,7 +329,7 @@ sudo apt install openssh-client -y
 
 ---
 
-### Gerar chave SSH (ed25519)
+#### Gerar chave SSH (ed25519)
 
 ```bash
 ssh-keygen -t ed25519 -C "seu-email-do-github@email.com"
@@ -325,33 +343,79 @@ Arquivos gerados:
 
 ---
 
-### Copiar chave pública
+#### Adicionar chave pública no GitHub
+
+Copie a chave:
 
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
 
-Adicionar no GitHub em:
+No GitHub:
 
-**Settings → SSH and GPG keys → New SSH key**
+1. Clique na sua foto de perfil
+2. Vá em **Settings**
+3. Clique em **SSH and GPG keys**
+4. Clique em **New SSH key**
+5. Cole o conteúdo da chave pública (.pub)
+6. Clique em **Add SSH key**
 
 ---
 
-### Testar conexão
+#### Testar conexão SSH
 
 ```bash
 ssh -T git@github.com
 ```
 
+Se a conexão for bem-sucedida, você verá uma mensagem de autenticação do GitHub.
+
 ---
 
-### Conectar repositório remoto e enviar commits
+#### Problema comum: bloqueio de porta 22 (rede corporativa)
 
-Dentro do projeto:
+Se aparecer erro como:
+
+```
+ssh: connect to host github.com port 22: Connection timed out
+```
+
+Isso pode indicar bloqueio de saída na porta 22.
+
+---
+
+#### Alternativa: usar HTTPS
+
+Caso o SSH esteja bloqueado, altere o remoto para HTTPS:
+
+```bash
+git remote set-url origin https://github.com/SEU_USUARIO/devops-lab.git
+```
+
+Depois execute:
+
+```bash
+git push
+```
+
+Nesse modo, o GitHub poderá solicitar autenticação via token.
+
+---
+
+### 7.3 Conectar repositório local ao remoto
+
+Dentro do diretório do seu projeto:
 
 ```bash
 git remote add origin git@github.com:SEU_USUARIO/devops-lab.git
 git remote -v
+```
+
+---
+
+### 7.4 Enviar primeiro push
+
+```bash
 git push -u origin main
 ```
 
