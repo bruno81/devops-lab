@@ -172,38 +172,67 @@ Depois entre novamente na distro:
 wsl -d Ubuntu-22.04
 ```
 
-4. Backup e restore de distro
-Exportar (backup)
+## 4. Backup e restore de distro
+
+### Exportar (backup)
+
+```powershell
 wsl --export Ubuntu-22.04 ubuntu-backup.tar
+```
 
-Importar (restore)
+---
+
+### Importar (restore)
+
+```powershell
 wsl --import Ubuntu-22.04-restaurado C:\WSL\ ubuntu-backup.tar
+```
 
-5. Integração VSCode + WSL
-Método 1 (recomendado)
+---
 
-Instale o VSCode no Windows
+## 5. Integração VSCode + WSL
 
-Instale a extensão Remote - WSL
+### Método 1 (recomendado)
 
-No VSCode: Ctrl + Shift + P → WSL: Connect to WSL
+1. Instale o VSCode no Windows  
+2. Instale a extensão **Remote - WSL**  
+3. No VSCode pressione:
+
+```
+Ctrl + Shift + P
+```
+
+Digite:
+
+```
+WSL: Connect to WSL
+```
 
 No canto inferior esquerdo deve aparecer algo como:
 
+```
 WSL: Ubuntu-22.04
+```
 
-Método 2 (garantir comando code no PATH)
+---
+
+### Método 2 (garantir comando `code` no PATH)
 
 Dentro do WSL:
 
+```bash
 echo 'export PATH="$PATH:/mnt/c/Users/SEU_USUARIO/AppData/Local/Programs/Microsoft VS Code/bin"' >> ~/.bashrc
 source ~/.bashrc
 which code
+```
 
+---
 
-Abrir pasta no VSCode:
+### Abrir pasta no VSCode
 
+```bash
 code .
+```
 
 6. Git: configuração e fluxo básico
 Instalar Git
