@@ -12,7 +12,7 @@ Guia prático para configurar um ambiente de desenvolvimento no Windows usando *
 - [4. Backup e restore de distro](#4-backup-e-restore-de-distro)
 - [5. Integração VSCode + WSL](#5-integração-vscode--wsl)
 - [6. Git: configuração e fluxo básico](#6-git-configuração-e-fluxo-básico)
-- [7. Publicar projeto no GitHub (SSH)](#7-publicar-projeto-no-github)
+- [7. Publicar projeto no GitHub e SSH](#7-publicar-projeto-no-github-e-ssh)
 
 ---
 
