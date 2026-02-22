@@ -126,34 +126,51 @@ wsl --set-default Ubuntu-22.04
 ```powershell
 wsl --unregister NOME_DA_DISTRO
 ```
-3. Hostname permanente no WSL
+
+## 3. Hostname permanente no WSL
+
+### Alterar hostname
 
 Dentro do WSL:
 
+```bash
 sudo hostnamectl set-hostname devops-lab
 hostname
+```
 
+---
 
-Para persistir após reinício, edite /etc/wsl.conf:
+### Tornar permanente após reinício
 
+Edite o arquivo `/etc/wsl.conf`:
+
+```bash
 sudo vim /etc/wsl.conf
+```
 
+Adicione o seguinte conteúdo:
 
-Conteúdo:
-
+```ini
 [network]
 hostname=devops-lab
 generateHosts=false
+```
 
+---
 
-Aplicar no PowerShell:
+### Aplicar alterações
 
+No PowerShell:
+
+```powershell
 wsl --shutdown
+```
 
+Depois entre novamente na distro:
 
-Entrar novamente:
-
+```powershell
 wsl -d Ubuntu-22.04
+```
 
 4. Backup e restore de distro
 Exportar (backup)
