@@ -234,82 +234,125 @@ which code
 code .
 ```
 
-6. Git: configuração e fluxo básico
-Instalar Git
+## 6. Git: configuração e fluxo básico
+
+### Instalar Git
+
+```bash
 sudo apt update
 sudo apt install git -y
 git --version
+```
 
-Configurar identidade (obrigatório)
+---
+
+### Configurar identidade (obrigatório)
+
+```bash
 git config --global user.name "Seu Nome"
 git config --global user.email "seuemail@email.com"
 git config --list
+```
 
-Criar projeto versionado (exemplo)
+---
+
+### Criar projeto versionado (exemplo)
+
+```bash
 mkdir -p ~/projects/devops-labs/git-basico
 cd ~/projects/devops-labs/git-basico
 echo "# Meu primeiro projeto Git" > README.md
+```
 
-Entender o fluxo básico
+---
 
-Git tem 3 áreas:
+### Entender o fluxo básico
 
-Working directory (seus arquivos)
+Git trabalha com três áreas:
 
-Staging area
+- **Working Directory** (seus arquivos)
+- **Staging Area**
+- **Commit (histórico)**
 
-Commit (histórico)
+Comandos básicos:
 
-Comandos:
-
+```bash
 git init
 git add README.md
 git commit -m "Primeiro commit"
 git status
 git log --oneline
+```
 
+---
 
-Renomear branch principal para main:
+### Renomear branch principal para main
 
+```bash
 git branch -m main
 git branch
+```
 
-7. SSH para GitHub
-Verificar SSH
+---
+
+## 7. SSH para GitHub
+
+### Verificar SSH
+
+```bash
 ssh -V
+```
 
+Se necessário, instalar:
 
-Se precisar instalar:
-
+```bash
 sudo apt install openssh-client -y
+```
 
-Gerar chave (ed25519)
+---
+
+### Gerar chave SSH (ed25519)
+
+```bash
 ssh-keygen -t ed25519 -C "seu-email-do-github@email.com"
 ls ~/.ssh
+```
 
+Arquivos gerados:
 
-Arquivos:
+- `id_ed25519` → chave privada  
+- `id_ed25519.pub` → chave pública  
 
-id_ed25519 (privada)
+---
 
-id_ed25519.pub (pública)
+### Copiar chave pública
 
-Copiar chave pública
+```bash
 cat ~/.ssh/id_ed25519.pub
+```
 
+Adicionar no GitHub em:
 
-Adicione no GitHub em: Settings → SSH and GPG keys → New SSH key
+**Settings → SSH and GPG keys → New SSH key**
 
-Testar conexão
+---
+
+### Testar conexão
+
+```bash
 ssh -T git@github.com
+```
 
-Conectar repositório remoto e fazer push
+---
 
-Dentro do seu projeto:
+### Conectar repositório remoto e enviar commits
 
+Dentro do projeto:
+
+```bash
 git remote add origin git@github.com:SEU_USUARIO/devops-lab.git
 git remote -v
 git push -u origin main
+```
 
-
-O que -u faz: cria vínculo entre branch local e remota para facilitar próximos push/pull.
+O parâmetro `-u` cria o vínculo entre a branch local e a remota, facilitando futuros `git push` e `git pull`.
