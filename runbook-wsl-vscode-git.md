@@ -24,56 +24,106 @@ Abra o **PowerShell**:
 
 ```powershell
 wsl --status
+```
 
 Se não reconhecer o comando, habilite os recursos do Windows abaixo.
 
-Habilitar recursos necessários (recomendado via CLI)
+---
+
+### Habilitar recursos necessários (via CLI)
 
 No PowerShell (Administrador):
 
+```powershell
 dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-
+```
 
 Reinicie o Windows após habilitar.
 
-Definir WSL2 como padrão
+---
+
+### Definir WSL2 como padrão
+
+```powershell
 wsl --set-default-version 2
+```
 
-Listar distros disponíveis
+---
+
+### Listar distros disponíveis
+
+```powershell
 wsl --list --online
+```
 
-Instalar Ubuntu 22.04
+---
+
+### Instalar Ubuntu 22.04
+
+```powershell
 wsl --install -d Ubuntu-22.04
-
+```
 
 Durante a instalação será solicitado criar usuário e senha no Linux.
 
-2. Gerenciamento de distros
-Listar distros instaladas e versão
+## 2. Gerenciamento de distros
+
+### Listar distros instaladas
+
+```powershell
 wsl -l -v
+```
 
-Entrar na distro
+---
+
+### Entrar na distro padrão
+
+```powershell
 wsl
+```
 
+### Entrar em distro específica
 
-Ou específica:
-
+```powershell
 wsl -d Ubuntu-22.04
+```
 
-Sair da distro
+---
+
+### Sair da distro
+
+```bash
 exit
+```
 
-Parar todas as distros
+---
+
+### Parar todas as distros
+
+```powershell
 wsl --shutdown
+```
 
-Parar uma distro específica
+### Parar distro específica
+
+```powershell
 wsl --terminate Ubuntu-22.04
+```
 
-Definir distro padrão
+---
+
+### Definir distro padrão
+
+```powershell
 wsl --set-default Ubuntu-22.04
+```
 
-Remover uma distro
+---
+
+### Remover distro
+
+```powershell
 wsl --unregister NOME_DA_DISTRO
 
 3. Hostname permanente no WSL
