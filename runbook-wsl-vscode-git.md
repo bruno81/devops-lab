@@ -125,7 +125,7 @@ wsl --set-default Ubuntu-22.04
 
 ```powershell
 wsl --unregister NOME_DA_DISTRO
-
+```
 3. Hostname permanente no WSL
 
 Dentro do WSL:
